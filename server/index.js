@@ -43,19 +43,17 @@ app.get("/read", async (req, res) => {
 app.put("/update", async (req, res) => {
   const { id, newFoodName } = req.body;
   try {
-    await FoodModel.findByIdAndUpdate(id, {foodName: newFoodName})
-    res.send("updated")
-
+    await FoodModel.findByIdAndUpdate(id, { foodName: newFoodName }).exec();
+    res.send("updated");
   } catch (err) {
     console.log(err);
   }
 });
 
-app.delete("/delete/:id", async (req, res)=>{
-  const id = req.params.id
-  await FoodModel.findByIdAndDelete(id)
-})
-
+app.delete("/delete/:id", async (req, res) => {
+  const id = req.params.id;
+  await FoodModel.findByIdAndDelete(id).exec();
+});
 
 app.listen(3001, () => {
   console.log("server up on 3001");
